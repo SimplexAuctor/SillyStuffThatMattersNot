@@ -1,5 +1,25 @@
 <html>
 <head>
+<style>
+body
+{
+    background-color: #444444;
+    color: #FFFFFF;
+}
+
+#joke
+{
+    background-color: #000000;
+    display: inline-block;
+    margin: 3px;
+    padding: 15px;
+}
+
+a {
+    color: BBBBBB;
+}
+
+</style>
 <script>
 function getQueryVariable(variable)
 {
@@ -14,17 +34,13 @@ function getQueryVariable(variable)
 
 function prefill()
 {
-    document.getElementById("noun1a").textContent=getQueryVariable("noun1");
-    document.getElementById("noun1b").textContent=getQueryVariable("noun1");
-    document.getElementById("noun1c").textContent=getQueryVariable("noun1");
-
-    document.getElementById("noun2a").textContent=getQueryVariable("noun2");
-    document.getElementById("noun2b").textContent=getQueryVariable("noun2");
-    document.getElementById("noun2c").textContent=getQueryVariable("noun2");
-
-    document.getElementById("opinion1").textContent=getQueryVariable("opinion1");
-    document.getElementById("opinion2").textContent=getQueryVariable("opinion2");
-    document.getElementById("opinion3").textContent=getQueryVariable("opinion3");
+    noun1input.value=getQueryVariable("noun1");
+    noun2input.value=getQueryVariable("noun2");
+    opinion1input.value=getQueryVariable("opinion1");
+    opinion2input.value=getQueryVariable("opinion2");
+    opinion3input.value=getQueryVariable("opinion3");
+    
+    UpdateFields();
 }
 
 function UpdateFields()
@@ -40,11 +56,30 @@ function UpdateFields()
     document.getElementById("opinion1").textContent=opinion1input.value;
     document.getElementById("opinion2").textContent=opinion2input.value;
     document.getElementById("opinion3").textContent=opinion3input.value;
+    
+    var url = "https://simplexauctor.github.io/SillyStuffThatMattersNot/madlib_dadjoke.html?noun1=" + noun1input.value + "&noun2=" + noun2input.value + "&opinion1=" + opinion1input.value + "&opinion2=" + opinion2input.value + "&opinion3=" + opinion3input.value;
+    var a = document.createElement('a');
+    a.setAttribute('href', url);
+    a.innerHTML = "Share";
+    
+    document.getElementById("shareurl").innerHTML = "Share".link(url);
 }
 </script>
 </head>
 <body onload="prefill();">
-<form>
+
+<div id=joke>
+A <span id="noun1a"></span>, a <span id="noun2a"></span> and a piece of toast walk into a bar.<br/>
+The <span id="noun1b"></span> says, "I refuse to sit with anyone who thinks <span id="opinion1"></span>!"<br/>
+The <span id="noun2b"></span> says, "Yeah?! Well I refuse to sit with anyone who thinks <span id="opinion2"></span>!"<br/>
+The piece of toast says "<span id="opinion3"></span>"<br/>
+The <span id="noun1c"></span> and the <span id="noun2c"></span> then decided to settle their differences and break bread together.
+</div>
+
+<br/>
+<hr/>
+<h1>Make your own!</h1>
+
 <table>
 <tr><td>Noun1:</td><td><Input id=noun1input onchange="UpdateFields()"/></td></tr>
 <tr><td>Noun2:</td><td><Input id=noun2input onchange="UpdateFields()"/></td></tr>
@@ -52,11 +87,9 @@ function UpdateFields()
 <tr><td>Counter Opinion:</td><td><Input id=opinion2input onchange="UpdateFields()"/></td></tr>
 <tr><td>Irrelevant Opinion:</td><td><Input id=opinion3input onchange="UpdateFields()"/></td></tr>
 </table>
-</form>
-A <span id="noun1a"></span>, a <span id="noun2a"/></span> and a piece of toast walk into a bar.<br/>
-The <span id="noun1b"/></span> says, "I refuse to sit with anyone who thinks <span id="opinion1"/></span>!"<br/>
-The <span id="noun2b"/></span> says, "Yeah?! Well I refuse to sit with anyone who thinks <span id="opinion2"/></span>!"<br/>
-The piece of toast says "<span id="opinion3"/></span>"<br/>
-The <span id="noun1c"/></span> and the <span id="noun2c"/></span> then decided to settle their differences and break bread together.
+
+<br/>
+Link to share: <span id="shareurl"></span>
+
 </body>
 </html>
